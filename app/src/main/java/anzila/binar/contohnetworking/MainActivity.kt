@@ -31,11 +31,12 @@ class MainActivity : AppCompatActivity() {
     fun showDataNews() {
         val viewModelNews = ViewModelProvider(this).get(NewsViewModel::class.java)
         viewModelNews.callApiNews()
-        viewModelNews.liveDataNews.observe(this, {
-            if (it != null){
-                binding.rvNews.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        viewModelNews.liveDataNews.observe(this) {
+            if (it != null) {
+                binding.rvNews.layoutManager =
+                    LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
                 binding.rvNews.adapter = NewsAdapter(it)
             }
-        })
+        }
     }
 }

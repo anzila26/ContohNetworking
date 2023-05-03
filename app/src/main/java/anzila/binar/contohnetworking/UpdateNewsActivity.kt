@@ -27,9 +27,9 @@ class UpdateNewsActivity : AppCompatActivity() {
     fun updateDataNews(id: Int, title: String, image: String, author: String, desc: String) {
         var viewModel = ViewModelProvider(this).get(NewsViewModel::class.java)
         viewModel.callUpdDataNews(id, title, image, author, desc)
-        viewModel.putNews().observe(this, {
+        viewModel.putNews().observe(this) {
             if (it != null) {
             }
-        })
+        }
     }
 }
