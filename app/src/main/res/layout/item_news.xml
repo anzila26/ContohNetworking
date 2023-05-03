@@ -8,7 +8,7 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:id="@+id/updateNews"
+        android:id="@+id/klikDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -41,6 +41,12 @@
             android:layout_height="wrap_content"
             android:text="28 April 2023"/>
         </LinearLayout>
+        <ImageView
+            android:id="@+id/btnDelete"
+            android:src="@drawable/baseline_delete_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"/>
 
         <ImageView
             android:id="@+id/btnUpdate"
