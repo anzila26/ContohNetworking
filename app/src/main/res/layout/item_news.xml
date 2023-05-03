@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    app:cardElevation="5dp"
+    app:cardCornerRadius="15dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <RelativeLayout
+        android:id="@+id/updateNews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -12,6 +17,14 @@
             android:src="@drawable/ic_launcher_background"
             android:layout_width="100dp"
             android:layout_height="100dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:layout_toRightOf="@+id/imgNews"
+            android:orientation="vertical">
 
         <TextView
             android:id="@+id/titleNews"
@@ -27,6 +40,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="28 April 2023"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/btnUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/baseline_update_24"/>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

@@ -1,12 +1,15 @@
 package anzila.binar.contohnetworking
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import anzila.binar.contohnetworking.databinding.ActivityMainBinding
 import anzila.binar.contohnetworking.model.ResponDataNewsItem
 import anzila.binar.contohnetworking.network.RetrofitClient
+import anzila.binar.contohnetworking.viewmodel.NewsViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,26 +21,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        getDataNews()
+        showDataNews()
+
+        binding.addButton.setOnClickListener {
+            startActivity(Intent(this, AddNewsActivity::class.java))
+        }
     }
 
-    fun getDataNews(){
-        RetrofitClient.instance.getAllNews().enqueue(object : Callback<List<ResponDataNewsItem>> {
-            override fun onResponse(
-                call: Call<List<ResponDataNewsItem>>,
-                response: Response<List<ResponDataNewsItem>>
-            ) {
-                if (response.isSuccessful) {
-                    binding.rvNews.layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL,false)
-                    binding.rvNews.adapter = NewsAdapter(response.body()!!)
-                    //show data
-                } else {
-                    Toast.makeText(this@MainActivity, "Failed load data", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<List<ResponDataNewsItem>>, t: Throwable) {
-                Toast.makeText(this@MainActivity, "", Toast.LENGTH_SHORT).show()
+    fun showDataNews() {
+        val viewModelNews = ViewModelProvider(this).get(NewsViewModel::class.java)
+        viewModelNews.callApiNews()
+        viewModelNews.liveDataNews.observe(this, {
+            if (it != null){
+                binding.rvNews.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+                binding.rvNews.adapter = NewsAdapter(it)
             }
         })
     }

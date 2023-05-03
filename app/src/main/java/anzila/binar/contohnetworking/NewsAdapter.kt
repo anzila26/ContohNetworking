@@ -1,5 +1,6 @@
 package anzila.binar.contohnetworking
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +22,12 @@ class NewsAdapter(var listNews : List<ResponDataNewsItem>): RecyclerView.Adapter
         holder.binding.titleNews.text = listNews[position].title
         holder.binding.dateNews.text = listNews[position].createdAt
         Glide.with(holder.itemView).load(listNews[position].image).into(holder.binding.imgNews)
+
+        holder.binding.btnUpdate.setOnClickListener {
+            var edit = Intent(it.context, UpdateNewsActivity::class.java)
+            edit.putExtra("update", listNews[position].id)
+            it.context.startActivity(edit)
+        }
     }
 
     override fun getItemCount(): Int {
